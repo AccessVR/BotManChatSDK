@@ -3,7 +3,7 @@
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/orchestratexr/botman-chat-sdk.svg?style=flat-square)](https://packagist.org/packages/orchestratexr/botman-chat-sdk)
 [![Total Downloads](https://img.shields.io/packagist/dt/orchestratexr/botman-chat-sdk.svg?style=flat-square)](https://packagist.org/packages/orchestratexr/botman-chat-sdk)
 [![License](https://img.shields.io/packagist/l/orchestratexr/botman-chat-sdk.svg?style=flat-square)](LICENSE.md)
-![GitHub Actions](https://github.com/orchestratexr/botman-chat-sdk/actions/workflows/build-assets.yml/badge.svg)
+![GitHub Actions](https://github.com/AccessVR/BotManChatSDK/actions/workflows/build-assets.yml/badge.svg)
 
 This is where your description should go. Try and limit it to a paragraph or two, and maybe throw in a mention of what PSRs you support to avoid any confusion with users and contributors.
 
