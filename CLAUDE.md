@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Overview
 
-This is a Laravel package called `collegeman/botman-web-widget` - a drop-in replacement for the BotMan Web Widget that includes AI-powered chat functionality using OpenAI's GPT models through the LLPhant library.
+This is a Laravel package called `orchestratexr/botman-chat-sdk` - a drop-in replacement for the BotMan Web Widget that includes AI-powered chat functionality using OpenAI's GPT models through the LLPhant library.
 
 ## Development Commands
 

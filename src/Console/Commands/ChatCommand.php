@@ -1,12 +1,12 @@
 <?php
 
-namespace Collegeman\BotManWebWidget\Console\Commands;
+namespace OrchestrateXR\BotManChatSDK\Console\Commands;
 
 use BotMan\BotMan\BotMan;
 use BotMan\BotMan\BotManFactory;
 use BotMan\BotMan\Drivers\DriverManager;
-use Collegeman\BotManWebWidget\Conversations\ChatConversation;
-use Collegeman\BotManWebWidget\Drivers\CommandDriver;
+use OrchestrateXR\BotManChatSDK\Conversations\ChatConversation;
+use OrchestrateXR\BotManChatSDK\Drivers\CommandDriver;
 use Illuminate\Console\Command;
 use Illuminate\Http\Request;
 
@@ -61,7 +61,7 @@ class ChatCommand extends Command
         }
 
         // look at built-in conversations first
-        $builtInRef = "\\Collegeman\\BotManWebWidget\\Conversations\\{$ref}";
+        $builtInRef = "\\OrchestrateXR\\BotManChatSDK\\Conversations\\{$ref}";
         if (class_exists($builtInRef)) {
             return new $builtInRef($this->option('chat'));
         }

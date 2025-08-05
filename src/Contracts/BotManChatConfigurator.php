@@ -1,8 +1,8 @@
 <?php
 
-namespace Collegeman\BotManWebWidget\Contracts;
+namespace OrchestrateXR\BotManChatSDK\Contracts;
 
-interface BotManWebWidgetConfigurator
+interface BotManChatConfigurator
 {
     /**
      * Retrieve the User ID for the authenticated session.

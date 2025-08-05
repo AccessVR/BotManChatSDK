@@ -1,18 +1,25 @@
 {
-    "name": "collegeman/botman-web-widget",
+    "name": "orchestratexr/botman-chat-sdk",
     "version": "0.0.12",
     "description": "",
     "keywords": [
-        "collegeman",
-        "botman-web-widget"
+        "botman",
+        "botman-web-widget",
+        "chat",
+        "llphant",
+        "openai"
     ],
-    "homepage": "https://github.com/collegeman/botman-web-widget",
+    "homepage": "https://github.com/AccessVR/BotManChatSDK",
     "license": "MIT",
     "type": "library",
     "authors": [
         {
             "name": "Aaron Collegeman",
             "email": "aaroncollegeman@gmail.com"
+        },
+        {
+            "name": "Aaron Collegeman",
+            "email": "acollegeman@accessvr.com"
         }
     ],
     "require": {
@@ -31,12 +38,12 @@
     },
     "autoload": {
         "psr-4": {
-            "Collegeman\\BotManWebWidget\\": "src"
+            "OrchestrateXR\\BotManChatSDK\\": "src"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "Collegeman\\BotManWebWidget\\Tests\\": "tests"
+            "OrchestrateXR\\BotManChatSDK\\Tests\\": "tests"
         }
     },
     "scripts": {
@@ -52,10 +59,10 @@
     "extra": {
         "laravel": {
             "providers": [
-                "Collegeman\\BotManWebWidget\\BotManWebWidgetServiceProvider"
+                "OrchestrateXR\\BotManChatSDK\\BotManWebWidgetServiceProvider"
             ],
             "aliases": {
-                "BotManWebWidget": "Collegeman\\BotManWebWidget\\BotManWebWidget"
+                "BotManChat": "OrchestrateXR\\BotManChatSDK\\BotManChat"
             }
         }
     }

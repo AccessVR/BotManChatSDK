@@ -1,6 +1,6 @@
 <?php
 
-namespace Collegeman\BotManWebWidget\Http\Controllers;
+namespace OrchestrateXR\BotManChatSDK\Http\Controllers;
 
 use BotMan\BotMan\BotMan;
 use BotMan\BotMan\BotManFactory;
@@ -8,11 +8,10 @@ use BotMan\BotMan\Cache\LaravelCache;
 use BotMan\BotMan\Drivers\DriverManager;
 use BotMan\BotMan\Interfaces\Middleware\Sending;
 use BotMan\Drivers\Web\WebDriver;
-use Collegeman\BotManWebWidget\Conversations\ExampleLLPhantConversation;
-use Collegeman\BotManWebWidget\Conversations\TestConversation;
+use OrchestrateXR\BotManChatSDK\Conversations\TestConversation;
 use Illuminate\Http\Request;
 
-class BotManWebWidgetTestController
+class BotManChatTestController
 {
     public function listen(Request $request)
     {
@@ -29,10 +28,6 @@ class BotManWebWidgetTestController
                 dump($payload);
                 return $next($payload);
             }
-        });
-
-        $botman->hears("llphant:(.*?)\s+(.*)", function (BotMan $bot, $chat, $prompt) {
-            $bot->startConversation((new ExampleLLPhantConversation($chat, $prompt))->convertMarkdownToHtml(true));
         });
 
         $botman->hears("test", function (BotMan$bot) {

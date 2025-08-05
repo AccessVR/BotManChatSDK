@@ -1,6 +1,6 @@
 <?php
 
-namespace Collegeman\BotManWebWidget\Conversations;
+namespace OrchestrateXR\BotManChatSDK\Conversations;
 
 use BotMan\BotMan\Messages\Conversations\Conversation;
 use BotMan\BotMan\Messages\Outgoing\OutgoingMessage;

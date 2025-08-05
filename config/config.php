@@ -4,7 +4,7 @@
  * You can place your custom package configuration in here.
  */
 
-use Collegeman\BotManWebWidget\Events\BotManMessageCreated;
+use OrchestrateXR\BotManChatSDK\Events\BotManMessageCreated;
 
 return [
     // The URL of the BotMan route / server to use.
@@ -77,7 +77,7 @@ return [
     'beaconSize' => 60,
 
     // Link used for the "about" section in the widget footer.
-    'aboutLink' => 'https://github.com/collegeman/botman-web-widget',
+    'aboutLink' => 'https://github.com/AccessVR/BotManChatSDK',
 
     // Text used for the "about" section in the widget footer.
     'aboutText' => 'Powered by BotMan',

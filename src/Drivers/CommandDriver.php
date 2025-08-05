@@ -1,6 +1,6 @@
 <?php
 
-namespace Collegeman\BotManWebWidget\Drivers;
+namespace OrchestrateXR\BotManChatSDK\Drivers;
 
 use BotMan\BotMan\Drivers\HttpDriver;
 use BotMan\BotMan\Http\Curl;

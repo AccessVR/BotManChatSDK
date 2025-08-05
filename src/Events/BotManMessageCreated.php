@@ -1,15 +1,12 @@
 <?php
 
-namespace Collegeman\BotManWebWidget\Events;
+namespace OrchestrateXR\BotManChatSDK\Events;
 
-use App\Http\Resources\AssetState;
-use App\Models\Asset;
-use Collegeman\BotManWebWidget\BotManMessage;
-use Collegeman\BotManWebWidget\BotManWebWidget;
+use OrchestrateXR\BotManChatSDK\BotManChat;
+use OrchestrateXR\BotManChatSDK\BotManMessage;
 use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Broadcasting\PrivateChannel;
 use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
-use Illuminate\Contracts\Broadcasting\ShouldBroadcastNow;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
 
@@ -31,7 +28,7 @@ class BotManMessageCreated implements ShouldBroadcast
 
     public function broadcastAs(): string
     {
-        return BotManWebWidget::config('echoEventName');
+        return BotManChat::config('echoEventName');
     }
 
     /**
@@ -42,7 +39,7 @@ class BotManMessageCreated implements ShouldBroadcast
     public function broadcastOn(): array
     {
         return [
-            new PrivateChannel(BotManWebWidget::echoChannel()),
+            new PrivateChannel(BotManChat::echoChannel()),
         ];
     }
 

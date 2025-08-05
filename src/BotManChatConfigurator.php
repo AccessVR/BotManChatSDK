@@ -1,15 +1,15 @@
 <?php
 
-namespace Collegeman\BotManWebWidget;
+namespace OrchestrateXR\BotManChatSDK;
 
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 use Illuminate\Contracts\View\Factory as ViewFactory;
 use Illuminate\Contracts\View\View;
-use Collegeman\BotManWebWidget\Contracts\BotManWebWidgetConfigurator as BotManWebWidgetConfiguratorContract;
+use OrchestrateXR\BotManChatSDK\Contracts\BotManChatConfigurator as BotManWebWidgetConfiguratorContract;
 
-class BotManWebWidgetConfigurator implements BotManWebWidgetConfiguratorContract
+class BotManChatConfigurator implements BotManChatConfiguratorContract
 {
     protected Application $app;
 
@@ -130,14 +130,14 @@ class BotManWebWidgetConfigurator implements BotManWebWidgetConfiguratorContract
 
     protected function buildAsset($path): string
     {
-        $manifest = $this->app->publicPath('vendor/botman-web-widget/manifest.json');
+        $manifest = $this->app->publicPath('vendor/botman-chat-sdk/manifest.json');
         if (file_exists($manifest)) {
             $manifest = json_decode(file_get_contents($manifest), true);
             $asset = $manifest[$path];
             // TODO: don't rely on this helper function
-            return asset('vendor/botman-web-widget/'.$asset['file']);
+            return asset('vendor/botman-chat-sdk/'.$asset['file']);
         }
-        throw new \Exception('Botman Web Widget Manifest file not found; run `php artisan vendor:publish --tag=botman-web-widget-assets` to generate it.');
+        throw new \Exception('BotMan Chat SDK Manifest file not found; run `php artisan vendor:publish --tag=botman-chat-sdk-assets` to generate it.');
     }
 
     protected function hotAsset($path): string

@@ -1,6 +1,6 @@
 <?php
 
-namespace Collegeman\BotManWebWidget;
+namespace OrchestrateXR\BotManChatSDK;
 
 class BotManMessage
 {
