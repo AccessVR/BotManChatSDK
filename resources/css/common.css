@@ -1,0 +1,36 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+[x-cloak] {
+    display: none;
+}
+
+.icon svg {
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+
+@layer components {
+    .message-text {
+        p {
+            @apply mb-2;    
+        }
+        p:last-child {
+            @apply mb-0;
+        }
+        ol > li {
+            @apply list-decimal list-outside mb-2 ml-4;
+        }
+        ul > li {
+            @apply list-disc list-outside mb-2 ml-4;
+        }
+        li:last-child {
+            @apply mb-0;
+        }
+        li > p {
+            @apply inline;
+        }
+    }
+}

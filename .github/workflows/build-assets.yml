@@ -1,0 +1,45 @@
+name: Build Assets
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Get version from composer.json
+        id: get_version
+        run: |
+          VERSION=$(jq -r '.version' composer.json)
+          echo "version=$VERSION" >> $GITHUB_OUTPUT
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build assets
+        run: npm run build
+
+      - name: Configure Git
+        run: |
+          git config user.name "GitHub Actions Bot"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+      - name: Create and push tag
+        run: |
+          git add public/build -f
+          git commit -m "Build assets for version ${{ steps.get_version.outputs.version }}" || echo "No changes to commit"
+          git tag -a "v${{ steps.get_version.outputs.version }}" -m "Version ${{ steps.get_version.outputs.version }}"
+          git push origin "v${{ steps.get_version.outputs.version }}"
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} 
