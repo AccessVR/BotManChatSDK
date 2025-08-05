@@ -155,20 +155,24 @@ class ChatConversation extends Conversation
     }
 
     /**
-     * @param bool $rebuild
+     * @param ChatInterface|null $chat Optionally, a pre-configured chat client
      * @return ChatInterface
      * @throws \LLPhant\Exception\MissingParameterException
      */
-    public function chat(bool $rebuild = false): ChatInterface
+    public function chat(?ChatInterface $chat = null): ChatInterface
     {
-        if (empty($this->chat) || $rebuild) {
+        if (!empty($chat)) {
+            $this->chat = $chat;
+            $this->tools->each(fn (FunctionInfo $tool) => $this->chat->addTool($tool));
+
+        } else if (empty($this->chat)) {
             $config = new OpenAIConfig();
             $config->apiKey = env('OPENAI_API_KEY');
             $config->model = OpenAIChatModel::Gpt4Omni->value;
             $this->chat = new OpenAIChat($config);
-
             $this->tools->each(fn (FunctionInfo $tool) => $this->chat->addTool($tool));
         }
+
         return $this->chat;
     }
 

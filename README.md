@@ -1,15 +1,34 @@
-# A drop-in replacement for the BotMan Web Widget
+# An SDK for building AI-backed Chat Bots with BotMan and Laravel
 
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/orchestratexr/botman-chat-sdk.svg?style=flat-square)](https://packagist.org/packages/orchestratexr/botman-chat-sdk)
 [![Total Downloads](https://img.shields.io/packagist/dt/orchestratexr/botman-chat-sdk.svg?style=flat-square)](https://packagist.org/packages/orchestratexr/botman-chat-sdk)
 [![License](https://img.shields.io/github/license/AccessVR/BotManChatSDK)](https://github.com/AccessVR/BotManChatSDK/blob/main/LICENSE)
 ![GitHub Actions](https://github.com/AccessVR/BotManChatSDK/actions/workflows/build-assets.yml/badge.svg)
 
-This is where your description should go. Try and limit it to a paragraph or two, and maybe throw in a mention of what PSRs you support to avoid any confusion with users and contributors.
+BotManChatSDK is a Laravel package designed for supporting the creation of LLM-backed Chat
+Bots using [BotMan](https://github.com/botman/botman), [LLPhant](https://github.com/LLPhant/LLPhant), 
+and LLM providers like OpenAI, Anthropic, and Ollama.
+
+## About OrchestrateXR
+
+[OrchestrateXR](https://orchestratexr.com) is the easiest way to create and deploy XR content.
+Use your web browser to create for mobile, tablets, PCs and XR devices.
+
+## Roadmap
+
+* [x] Full compatability with existing [BotMan Drivers](https://botman.io/2.0/installation) including Slack 
+* [x] Drop-in replacement for [BotMan Web Widget](https://botman.io/2.0/web-widget)
+* [x] Drop Web Widget into any Laravel application, including Laravel Nova, using `@botman` blade directive
+* [x] Base class `ChatConversation` for building LLM-backed [Conversations](https://botman.io/2.0/conversations)
+* [x] Extend Conversations to emulate Agents with [Tools](https://github.com/LLPhant/LLPhant?tab=readme-ov-file#tools) that execute PHP functions
+* [x] Built-in Tool for crawling URLs which you can bootstrap into any `ChatConversation` with `$conversation->withCrawler()`
+* [ ] Custom [Cache](https://botman.io/2.0/cache-drivers) driver for persisting Conversations between user sessions
+* [ ] Example implementations of `ChatConversation` to help you get started
+* [ ] Enhanced Web Driver to provide for real-time message streaming
 
 ## Installation
 
-You can install the package via composer:
+Install this Laravel package via composer:
 
 ```bash
 composer require orchestratexr/botman-chat-sdk
