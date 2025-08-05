@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 use Illuminate\Contracts\View\Factory as ViewFactory;
 use Illuminate\Contracts\View\View;
-use OrchestrateXR\BotManChatSDK\Contracts\BotManChatConfigurator as BotManWebWidgetConfiguratorContract;
+use OrchestrateXR\BotManChatSDK\Contracts\BotManChatConfigurator as BotManChatConfiguratorContract;
 
 class BotManChatConfigurator implements BotManChatConfiguratorContract
 {
@@ -73,7 +73,7 @@ class BotManChatConfigurator implements BotManChatConfiguratorContract
     public function config($name = null, $value = null): mixed
     {
         if (empty($this->config)) {
-            $config = config('botman-web-widget');
+            $config = config('botman-chat-sdk');
 
             $this->config = array_merge([
                 'icons' => [

@@ -4,7 +4,8 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Overview
 
-This is a Laravel package called `orchestratexr/botman-chat-sdk` - a drop-in replacement for the BotMan Web Widget that includes AI-powered chat functionality using OpenAI's GPT models through the LLPhant library.
+This is a Laravel package called `orchestratexr/botman-chat-sdk` - a drop-in replacement for the BotMan 
+Web Widget that includes AI-powered chat functionality using OpenAI's GPT models through the LLPhant library.
 
 ## Development Commands
 
@@ -19,17 +20,19 @@ This is a Laravel package called `orchestratexr/botman-chat-sdk` - a drop-in rep
 - `php artisan botman:chat` - Start interactive CLI chat session with the AI bot
 
 ### Package Publishing (for Laravel integration)
-- `php artisan vendor:publish --tag=botman-web-widget-config` - Publish config file
-- `php artisan vendor:publish --tag=botman-web-widget-views` - Publish Blade views
-- `php artisan vendor:publish --tag=botman-web-widget-assets` - Publish built frontend assets
+- `php artisan vendor:publish --tag=botman-chat-sdk-config` - Publish config file
+- `php artisan vendor:publish --tag=botman-chat-sdk-views` - Publish Blade views
+- `php artisan vendor:publish --tag=botman-chat-sdk-assets` - Publish built frontend assets
 
 ## Architecture
 
 ### Core Components
 
-**BotMan Integration**: Built on the BotMan chatbot framework with a custom `CommandDriver` that enables CLI-based chat interactions alongside web-based ones.
+**BotMan Integration**: Built on the BotMan chatbot framework with a custom `CommandDriver` that 
+enables CLI-based chat interactions alongside web-based ones.
 
-**AI Chat System**: Uses LLPhant library to integrate OpenAI's GPT-4 model for conversational AI. The `ChatConversation` class handles:
+**AI Chat System**: Uses LLPhant library to integrate OpenAI's GPT-4 model for conversational AI. 
+The `ChatConversation` class handles:
 - Message history management
 - System prompt configuration  
 - Tool/function calling capabilities
@@ -41,7 +44,8 @@ This is a Laravel package called `orchestratexr/botman-chat-sdk` - a drop-in rep
 - Beacon/launcher widget
 - Responsive design for mobile and desktop
 
-**Laravel Service Provider**: Registers routes, publishes assets, and provides the `@botman` Blade directive for easy widget embedding.
+**Laravel Service Provider**: Registers routes, publishes assets, and provides the `@botman` Blade 
+directive for easy widget embedding.
 
 ### Key File Structure
 

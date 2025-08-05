@@ -4,8 +4,10 @@
     "description": "",
     "keywords": [
         "botman",
-        "botman-web-widget",
         "chat",
+        "sdk",
+        "php",
+        "laravel",
         "llphant",
         "openai"
     ],
@@ -59,7 +61,7 @@
     "extra": {
         "laravel": {
             "providers": [
-                "OrchestrateXR\\BotManChatSDK\\BotManWebWidgetServiceProvider"
+                "OrchestrateXR\\BotManChatSDK\\BotManChatServiceProvider"
             ],
             "aliases": {
                 "BotManChat": "OrchestrateXR\\BotManChatSDK\\BotManChat"
