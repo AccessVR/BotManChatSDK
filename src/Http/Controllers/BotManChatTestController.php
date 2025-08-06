@@ -30,7 +30,7 @@ class BotManChatTestController
             }
         });
 
-        $botman->hears("test", function (BotMan$bot) {
+        $botman->hears("test", function (BotMan $bot) {
             $bot->startConversation(new TestConversation());
         });
 

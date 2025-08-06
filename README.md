@@ -1,4 +1,4 @@
-# An SDK for building AI-backed Chat Bots with BotMan and Laravel
+# An SDK for building AI-backed chatbots with BotMan and Laravel
 
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/orchestratexr/botman-chat-sdk.svg?style=flat-square)](https://packagist.org/packages/orchestratexr/botman-chat-sdk)
 [![Total Downloads](https://img.shields.io/packagist/dt/orchestratexr/botman-chat-sdk.svg?style=flat-square)](https://packagist.org/packages/orchestratexr/botman-chat-sdk)
@@ -23,18 +23,71 @@ Use your web browser to create for mobile, tablets, PCs and XR devices.
 * [x] Extend Conversations to emulate Agents with [Tools](https://github.com/LLPhant/LLPhant?tab=readme-ov-file#tools) that execute PHP functions
 * [x] Built-in Tool for crawling URLs which you can bootstrap into any `ChatConversation` with `$conversation->withCrawler()`
 * [ ] Custom [Cache](https://botman.io/2.0/cache-drivers) driver for persisting Conversations between user sessions
-* [ ] Example implementations of `ChatConversation` to help you get started
-* [ ] Enhanced Web Driver to provide for real-time message streaming
+* [ ] Enhanced Web Driver to provide for real-time message streaming using Laravel event system
+* [ ] Discord Driver, to enable chat interactions in [Discord](https://discord.com/developers/docs/intro)
+* [ ] Chat Completion Driver, to enable chat requests and responses to take the form of [OpenAI Chat Completions](https://platform.openai.com/docs/api-reference/chat/create)
+* [ ] Examples of `ChatConversation` implementations, to help you start your journey
+* [x] Example `BotManChatServerController` for setting up the server-side of `ChatConversation` instances
+* [ ] Laravel Livewire Starter Kit bootstrapped with BotManChatSDK, perfect for deploying to [Laravel Cloud](https://cloud.laravel.com/)
+
+## Quickstart
+
+To be written:
+
+* Clone the starter kit repo
+* Add an environment variable
+* Run it locally using `php artisan serve`
 
 ## Installation
 
-Install this Laravel package via composer:
+Install this Laravel package via composer into an existing Laravel project:
 
 ```bash
 composer require orchestratexr/botman-chat-sdk
 ```
 
-## Usage
+Publish front-end assets and configuration
+
+```bash
+php artisan vendor:publish --provider="OrchestrateXR\BotManChatSDK\BotManChatServiceProvider"
+```
+
+Inject the chat client into your front-end using the `@botman` blade directive. For most Laravel applications,
+this means adding `@botman` to your blade layout. 
+
+```html
+<html lang="en">
+  <body>
+    @slot
+    
+    {{!-- somewhere near the bottom --}}
+    @blade
+  </body>
+</html>
+```
+
+In Laravel Nova applications, you can safely add `@botman` to your `meta.php` file. 
+
+Lastly, create a web route for BotMan chat requests:
+
+```php
+<?php
+// in your routes/web.php
+use OrchestrateXR\BotManChatSDK\Http\Controllers\BotManChatServerController;
+Route::get(BotManChat::config('chatServer'), [BotManChatServerController::class, 'listen']);
+```
+
+## Configuration
+
+You can configure the SDK by modifying your copy of `config/botman-chat-sdk.php`. It should
+have been generated when you published the assets for this Laravel package. If it does not or
+if you need to start over from scratch, just run this command:
+
+```bash
+php artisan vendor:publish --tag=botman-chat-sdk-config --force
+```
+
+## Customization
 
 ```php
 // Usage description here
@@ -60,8 +113,8 @@ If you discover any security related issues, please email acollegeman@gmail.com 
 
 ## Credits
 
--   [Aaron Collegeman](https://github.com/collegeman)
--   [All Contributors](../../contributors)
+- [Aaron Collegeman](https://github.com/collegeman)
+- [All Contributors](../../contributors)
 
 ## License
 

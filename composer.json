@@ -1,6 +1,6 @@
 {
     "name": "orchestratexr/botman-chat-sdk",
-    "version": "0.0.14",
+    "version": "0.0.15",
     "description": "",
     "keywords": [
         "botman",
@@ -20,8 +20,8 @@
             "email": "aaroncollegeman@gmail.com"
         },
         {
-            "name": "Aaron Collegeman",
-            "email": "acollegeman@accessvr.com"
+            "name": "AccessVR",
+            "email": "support@accessvr.com"
         }
     ],
     "require": {

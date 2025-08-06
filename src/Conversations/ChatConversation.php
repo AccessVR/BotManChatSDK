@@ -148,7 +148,6 @@ class ChatConversation extends Conversation
     {
         $this->logger()->info($something);
     }
-
     public function logger(): LoggerInterface
     {
         return Log::channel(null);
@@ -156,14 +155,15 @@ class ChatConversation extends Conversation
 
     /**
      * @param ChatInterface|null $chat Optionally, a pre-configured chat client
-     * @return ChatInterface
+     * @return ChatInterface|ChatConversation
      * @throws \LLPhant\Exception\MissingParameterException
      */
-    public function chat(?ChatInterface $chat = null): ChatInterface
+    public function chat(?ChatInterface $chat = null): ChatInterface | self
     {
         if (!empty($chat)) {
             $this->chat = $chat;
             $this->tools->each(fn (FunctionInfo $tool) => $this->chat->addTool($tool));
+            return $this;
 
         } else if (empty($this->chat)) {
             $config = new OpenAIConfig();
@@ -176,6 +176,10 @@ class ChatConversation extends Conversation
         return $this->chat;
     }
 
+    /**
+     * @return string The content of the generated chat response
+     * @throws \LLPhant\Exception\MissingParameterException
+     */
     protected function generateChatResponse(): string
     {
         $messages = collect($this->messages)->map(function ($message) {
@@ -194,7 +198,7 @@ class ChatConversation extends Conversation
         return $this->chat()->generateChat($messages);
     }
 
-    public function run()
+    public function run(): void
     {
         $this->handleChatResponse($this->generateChatResponse());
     }
