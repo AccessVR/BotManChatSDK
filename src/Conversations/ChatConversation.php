@@ -6,7 +6,6 @@ use BotMan\BotMan\Messages\Conversations\Conversation;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Http;
 use LLPhant\Chat\ChatInterface;
-use LLPhant\Chat\Enums\OpenAIChatModel;
 use LLPhant\Chat\FunctionInfo\FunctionInfo;
 use LLPhant\Chat\FunctionInfo\Parameter;
 use LLPhant\Chat\Message;
@@ -14,13 +13,12 @@ use BotMan\BotMan\Messages\Incoming\Answer;
 use BotMan\BotMan\Messages\Incoming\IncomingMessage;
 use Illuminate\Support\Facades\Log;
 use League\CommonMark\CommonMarkConverter;
-use LLPhant\Chat\OpenAIChat;
-use LLPhant\OpenAIConfig;
+use OrchestrateXR\BotManChatSDK\Contracts\DefaultChatInterface;
 use Psr\Log\LoggerInterface;
 
 class ChatConversation extends Conversation
 {
-    private ChatInterface $chat;
+    protected string $chatInterfaceKey = DefaultChatInterface::class;
 
     protected Collection $messages;
 
@@ -32,7 +30,17 @@ class ChatConversation extends Conversation
     {
         $this->messages = collect([]);
         $this->tools = collect([]);
+
         $this->system('You are a helpful assistant. You strive for brevity and clarity.');
+    }
+
+    public static function make(?string $prompt = null): static
+    {
+        $conversation = new static();
+        if (!empty($prompt)) {
+            $conversation->user($prompt);
+        }
+        return $conversation;
     }
 
     /**
@@ -154,31 +162,28 @@ class ChatConversation extends Conversation
     }
 
     /**
-     * @param ChatInterface|null $chat Optionally, a pre-configured chat client
-     * @return ChatInterface|ChatConversation
-     * @throws \LLPhant\Exception\MissingParameterException
+     * @param string|null $chatInterfaceKey Optionally, specify a container registration key for overriding default
+     * @return ChatInterface | self
      */
-    public function chat(?ChatInterface $chat = null): ChatInterface | self
+    public function chat(?string $chatInterfaceKey = null): ChatInterface | self
     {
-        if (!empty($chat)) {
-            $this->chat = $chat;
-            $this->tools->each(fn (FunctionInfo $tool) => $this->chat->addTool($tool));
+        if (!empty($chatInterfaceKey)) {
+            $this->chatInterfaceKey = $chatInterfaceKey;
             return $this;
-
-        } else if (empty($this->chat)) {
-            $config = new OpenAIConfig();
-            $config->apiKey = env('OPENAI_API_KEY');
-            $config->model = OpenAIChatModel::Gpt4Omni->value;
-            $this->chat = new OpenAIChat($config);
-            $this->tools->each(fn (FunctionInfo $tool) => $this->chat->addTool($tool));
         }
 
-        return $this->chat;
+        $chat = $this->getChatInterfaceFromContainer();
+        $this->tools->each(fn (FunctionInfo $tool) => $chat->addTool($tool));
+        return $chat;
+    }
+
+    protected function getChatInterfaceFromContainer(): ChatInterface
+    {
+        return app($this->chatInterfaceKey);
     }
 
     /**
      * @return string The content of the generated chat response
-     * @throws \LLPhant\Exception\MissingParameterException
      */
     protected function generateChatResponse(): string
     {

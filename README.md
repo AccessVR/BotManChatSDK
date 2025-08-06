@@ -74,7 +74,7 @@ Create a web route for BotMan chat requests:
 <?php
 // in your routes/web.php
 use OrchestrateXR\BotManChatSDK\Http\Controllers\BotManChatServerController;
-Route::get(BotManChat::config('chatServer'), [BotManChatServerController::class, 'listen']);
+Route::post(BotManChat::config('chatServer'), [BotManChatServerController::class, 'listen']);
 ```
 
 Lastly, if you are using all the defaults outlined above, you will need to create a

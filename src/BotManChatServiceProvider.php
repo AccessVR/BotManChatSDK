@@ -1,10 +1,14 @@
 <?php
 namespace OrchestrateXR\BotManChatSDK;
 
+use LLPhant\Chat\Enums\OpenAIChatModel;
+use LLPhant\Chat\OpenAIChat;
+use LLPhant\OpenAIConfig;
 use OrchestrateXR\BotManChatSDK\Console\Commands\ChatCommand;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\ServiceProvider;
 use OrchestrateXR\BotManChatSDK\Contracts\BotManChatConfigurator as BotManChatConfiguratorContract;
+use OrchestrateXR\BotManChatSDK\Contracts\DefaultChatInterface;
 
 class BotManChatServiceProvider extends ServiceProvider
 {
@@ -56,6 +60,13 @@ class BotManChatServiceProvider extends ServiceProvider
 
         // Register the main class to use with the facade
         $this->app->singleton(BotManChatConfiguratorContract::class, fn () => new BotManChatConfigurator($this->app));
+
+        $this->app->singleton(DefaultChatInterface::class, function ($app) {
+            $config = new OpenAIConfig();
+            $config->apiKey = env('OPENAI_API_KEY');
+            $config->model = OpenAIChatModel::Gpt4Omni->value;
+            return new OPenAIChat($config);
+        });
 
         Blade::directive('botman', function (string $expression) {
             return "<?php echo BotManChat::widget({$expression}); ?>";
