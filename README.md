@@ -68,7 +68,7 @@ this means adding `@botman` to your blade layout.
 
 In Laravel Nova applications, you can safely add `@botman` to your `meta.php` file. 
 
-Lastly, create a web route for BotMan chat requests:
+Create a web route for BotMan chat requests:
 
 ```php
 <?php
@@ -76,6 +76,14 @@ Lastly, create a web route for BotMan chat requests:
 use OrchestrateXR\BotManChatSDK\Http\Controllers\BotManChatServerController;
 Route::get(BotManChat::config('chatServer'), [BotManChatServerController::class, 'listen']);
 ```
+
+Lastly, if you are using all the defaults outlined above, you will need to create a
+Laravel environment variable to hold your [OpenAI API Key](https://platform.openai.com/api-keys):
+
+```bash
+OPENAI_API_KEY=sk-proj-XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+```
+
 
 ## Configuration
 
@@ -101,7 +109,7 @@ composer test
 
 ### Changelog
 
-Please see [CHANGELOG](CHANGELOG.md) for more information what has changed recently.
+Please see [CHANGELOG](CHANGELOG.md) for more information on what has changed recently.
 
 ## Contributing
 
