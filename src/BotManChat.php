@@ -12,6 +12,9 @@ use OrchestrateXR\BotManChatSDK\Contracts\BotManChatConfigurator as BotManChatCo
  */
 class BotManChat extends Facade
 {
+    // semantics
+    const ANYTHING = '(.*)';
+
     /**
      * Get the registered name of the component.
      *

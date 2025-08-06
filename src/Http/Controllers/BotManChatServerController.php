@@ -8,6 +8,7 @@ use BotMan\BotMan\Drivers\DriverManager;
 use BotMan\Drivers\Web\WebDriver;
 use Illuminate\Http\Request;
 use BotMan\BotMan\BotMan;
+use OrchestrateXR\BotManChatSDK\BotManChat;
 use OrchestrateXR\BotManChatSDK\Conversations\ChatConversation;
 
 class BotManChatServerController
@@ -19,7 +20,7 @@ class BotManChatServerController
 
         $botman = BotManFactory::create([], new LaravelCache());
 
-        $botman->hears('(.*)', fn(BotMan $bot, $prompt) =>
+        $botman->hears(BotManChat::ANYTHING, fn($bot, $prompt) =>
             $bot->startConversation(ChatConversation::make($prompt)->withCrawler()));
 
         $botman->listen();
