@@ -1,5 +1,4 @@
 <?php
-
 namespace OrchestrateXR\BotManChatSDK;
 
 use OrchestrateXR\BotManChatSDK\Console\Commands\ChatCommand;

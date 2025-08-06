@@ -64,7 +64,7 @@ directive for easy widget embedding.
 
 ### Configuration
 
-The widget behavior is controlled through `config/botman-web-widget.php` including:
+The widget behavior is controlled through `config/botman-chat-sdk.php` including:
 - Chat server endpoints (`/botman`, `/botman/chat`, `/botman/beacon`)
 - Visual styling (colors, dimensions, branding)
 - Real-time features via Laravel Echo (optional)

@@ -53,7 +53,7 @@ class BotManChatConfigurator implements BotManChatConfiguratorContract
             return $factory;
         }
 
-        return $factory->make('botman-web-widget::' . $view, $data, $mergeData);
+        return $factory->make('botman-chat-sdk::' . $view, $data, $mergeData);
     }
 
     protected function render($view, $data = [], $mergeData = []): string
