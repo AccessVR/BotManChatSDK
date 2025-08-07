@@ -16,9 +16,8 @@ Use your web browser to create for mobile, tablets, PCs and XR devices.
 
 ## Roadmap
 
-* [x] Full compatability with existing [BotMan Drivers](https://botman.io/2.0/installation) including Slack 
-* [x] Drop-in replacement for [BotMan Web Widget](https://botman.io/2.0/web-widget)
-* [x] Drop Web Widget into any Laravel application, including Laravel Nova, using `@botman` blade directive
+* [x] Full compatability with existing [BotMan Drivers](https://botman.io/2.0/installation), and drop-in replacement for [BotMan Web Widget](https://botman.io/2.0/web-widget)
+* [x] Add the Web Widget into any Laravel application, including Laravel Nova, using `@botman` blade directive
 * [x] Base class `ChatConversation` for building LLM-backed [Conversations](https://botman.io/2.0/conversations)
 * [x] Extend Conversations to emulate Agents with [Tools](https://github.com/LLPhant/LLPhant?tab=readme-ov-file#tools) that execute PHP functions
 * [x] Built-in Tool for crawling URLs which you can bootstrap into any `ChatConversation` with `$conversation->withCrawler()`
