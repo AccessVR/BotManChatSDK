@@ -1,12 +1,13 @@
 <?php
+
 namespace OrchestrateXR\BotManChatSDK;
 
+use Illuminate\Support\Facades\Blade;
+use Illuminate\Support\ServiceProvider;
 use LLPhant\Chat\Enums\OpenAIChatModel;
 use LLPhant\Chat\OpenAIChat;
 use LLPhant\OpenAIConfig;
 use OrchestrateXR\BotManChatSDK\Console\Commands\ChatCommand;
-use Illuminate\Support\Facades\Blade;
-use Illuminate\Support\ServiceProvider;
 use OrchestrateXR\BotManChatSDK\Contracts\BotManChatConfigurator as BotManChatConfiguratorContract;
 use OrchestrateXR\BotManChatSDK\Contracts\DefaultChatInterface;
 
@@ -62,9 +63,10 @@ class BotManChatServiceProvider extends ServiceProvider
         $this->app->singleton(BotManChatConfiguratorContract::class, fn () => new BotManChatConfigurator($this->app));
 
         $this->app->singleton(DefaultChatInterface::class, function ($app) {
-            $config = new OpenAIConfig();
+            $config = new OpenAIConfig;
             $config->apiKey = env('OPENAI_API_KEY');
             $config->model = OpenAIChatModel::Gpt4Omni->value;
+
             return new OPenAIChat($config);
         });
 

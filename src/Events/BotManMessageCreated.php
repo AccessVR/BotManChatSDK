@@ -2,13 +2,13 @@
 
 namespace OrchestrateXR\BotManChatSDK\Events;
 
-use OrchestrateXR\BotManChatSDK\BotManChat;
-use OrchestrateXR\BotManChatSDK\BotManMessage;
 use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Broadcasting\PrivateChannel;
 use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
+use OrchestrateXR\BotManChatSDK\BotManChat;
+use OrchestrateXR\BotManChatSDK\BotManMessage;
 
 class BotManMessageCreated implements ShouldBroadcast
 {
@@ -42,5 +42,4 @@ class BotManMessageCreated implements ShouldBroadcast
             new PrivateChannel(BotManChat::echoChannel()),
         ];
     }
-
 }

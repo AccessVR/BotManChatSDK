@@ -3,16 +3,16 @@
 namespace OrchestrateXR\BotManChatSDK\Conversations;
 
 use BotMan\BotMan\Messages\Conversations\Conversation;
+use BotMan\BotMan\Messages\Incoming\Answer;
+use BotMan\BotMan\Messages\Incoming\IncomingMessage;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Log;
+use League\CommonMark\CommonMarkConverter;
 use LLPhant\Chat\ChatInterface;
 use LLPhant\Chat\FunctionInfo\FunctionInfo;
 use LLPhant\Chat\FunctionInfo\Parameter;
 use LLPhant\Chat\Message;
-use BotMan\BotMan\Messages\Incoming\Answer;
-use BotMan\BotMan\Messages\Incoming\IncomingMessage;
-use Illuminate\Support\Facades\Log;
-use League\CommonMark\CommonMarkConverter;
 use OrchestrateXR\BotManChatSDK\Contracts\DefaultChatInterface;
 use Psr\Log\LoggerInterface;
 
@@ -26,7 +26,7 @@ class ChatConversation extends Conversation
 
     protected bool $convertMarkdownToHtml = false;
 
-    public final function __construct()
+    final public function __construct()
     {
         $this->messages = collect([]);
         $this->tools = collect([]);
@@ -36,15 +36,17 @@ class ChatConversation extends Conversation
 
     public static function make(?string $prompt = null): static
     {
-        $conversation = new static();
-        if (!empty($prompt)) {
+        $conversation = new static;
+        if (! empty($prompt)) {
             $conversation->user($prompt);
         }
+
         return $conversation;
     }
 
     /**
      * Reset the message and tools in this conversation.
+     *
      * @return $this
      */
     public function reset(): self
@@ -57,7 +59,7 @@ class ChatConversation extends Conversation
 
     /**
      * Set the system message for this conversation.
-     * @param string $content
+     *
      * @return $this
      */
     public function system(string $content): self
@@ -66,7 +68,7 @@ class ChatConversation extends Conversation
             if ($message instanceof Message) {
                 return $message->role !== 'system';
             } else {
-                return !empty($message['role']) && $message['role'] !== 'system';
+                return ! empty($message['role']) && $message['role'] !== 'system';
             }
         });
 
@@ -77,7 +79,7 @@ class ChatConversation extends Conversation
 
     /**
      * Append a user message to this conversation.
-     * @param string $content
+     *
      * @return $this
      */
     public function user(string $content): self
@@ -89,7 +91,7 @@ class ChatConversation extends Conversation
 
     /**
      * Append an assistant message to this conversation.
-     * @param string $content
+     *
      * @return $this
      */
     public function assistant(string $content): self
@@ -115,7 +117,7 @@ class ChatConversation extends Conversation
             [new Parameter('url', 'string', 'The URL to crawl')]
         );
 
-        if (!$this->tools->contains($crawler)) { // this probably doesn't work...
+        if (! $this->tools->contains($crawler)) { // this probably doesn't work...
             $this->tools->push($crawler);
         }
 
@@ -139,8 +141,8 @@ class ChatConversation extends Conversation
         $this->assistant($response);
 
         if ($this->convertMarkdownToHtml) {
-            if (!$converter = app(CommonMarkConverter::class)) {
-                throw new \Exception("CommonMarkConverter not found in container");
+            if (! $converter = app(CommonMarkConverter::class)) {
+                throw new \Exception('CommonMarkConverter not found in container');
             }
             $response = (string) $converter->convert($response);
         }
@@ -156,24 +158,26 @@ class ChatConversation extends Conversation
     {
         $this->logger()->info($something);
     }
+
     public function logger(): LoggerInterface
     {
         return Log::channel(null);
     }
 
     /**
-     * @param string|null $chatInterfaceKey Optionally, specify a container registration key for overriding default
-     * @return ChatInterface | self
+     * @param  string|null  $chatInterfaceKey  Optionally, specify a container registration key for overriding default
      */
-    public function chat(?string $chatInterfaceKey = null): ChatInterface | self
+    public function chat(?string $chatInterfaceKey = null): ChatInterface|self
     {
-        if (!empty($chatInterfaceKey)) {
+        if (! empty($chatInterfaceKey)) {
             $this->chatInterfaceKey = $chatInterfaceKey;
+
             return $this;
         }
 
         $chat = $this->getChatInterfaceFromContainer();
         $this->tools->each(fn (FunctionInfo $tool) => $chat->addTool($tool));
+
         return $chat;
     }
 
@@ -196,7 +200,7 @@ class ChatConversation extends Conversation
                 'system' => Message::system($message['content']),
                 'user' => Message::user($message['content']),
                 'assistant' => Message::assistant($message['content']),
-                default => throw new \Exception('Invalid message role: ' . $message['role'])
+                default => throw new \Exception('Invalid message role: '.$message['role'])
             };
         })->toArray();
 
@@ -214,5 +218,4 @@ class ChatConversation extends Conversation
 
         return $this;
     }
-
 }

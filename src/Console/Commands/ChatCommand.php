@@ -5,10 +5,10 @@ namespace OrchestrateXR\BotManChatSDK\Console\Commands;
 use BotMan\BotMan\BotMan;
 use BotMan\BotMan\BotManFactory;
 use BotMan\BotMan\Drivers\DriverManager;
-use OrchestrateXR\BotManChatSDK\Conversations\ChatConversation;
-use OrchestrateXR\BotManChatSDK\Drivers\CommandDriver;
 use Illuminate\Console\Command;
 use Illuminate\Http\Request;
+use OrchestrateXR\BotManChatSDK\Conversations\ChatConversation;
+use OrchestrateXR\BotManChatSDK\Drivers\CommandDriver;
 
 class ChatCommand extends Command
 {
@@ -16,10 +16,10 @@ class ChatCommand extends Command
 
     protected BotMan $botman;
 
-    function handle()
+    public function handle()
     {
         $config = [
-          //
+            //
         ];
 
         DriverManager::loadDriver(CommandDriver::class);
@@ -33,7 +33,7 @@ class ChatCommand extends Command
         });
 
         while (true) {
-            $this->output->write("> ");
+            $this->output->write('> ');
             $text = trim(fgets(STDIN));
             if (strtolower($text) === 'exit') {
                 $this->info('Goodbye!');

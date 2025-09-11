@@ -8,6 +8,7 @@ use OrchestrateXR\BotManChatSDK\Contracts\BotManChatConfigurator as BotManChatCo
 /**
  * @method config($name = null, $value = null): mixed
  * @method echoChannel(): string
+ *
  * @see \OrchestrateXR\BotManChatSDK\BotmanChatConfigurator
  */
 class BotManChat extends Facade

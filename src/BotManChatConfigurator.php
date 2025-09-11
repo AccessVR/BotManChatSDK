@@ -3,10 +3,10 @@
 namespace OrchestrateXR\BotManChatSDK;
 
 use Illuminate\Contracts\Foundation\Application;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Str;
 use Illuminate\Contracts\View\Factory as ViewFactory;
 use Illuminate\Contracts\View\View;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Str;
 use OrchestrateXR\BotManChatSDK\Contracts\BotManChatConfigurator as BotManChatConfiguratorContract;
 
 class BotManChatConfigurator implements BotManChatConfiguratorContract
@@ -43,7 +43,6 @@ class BotManChatConfigurator implements BotManChatConfiguratorContract
      * @param  string|null  $view
      * @param  \Illuminate\Contracts\Support\Arrayable|array  $data
      * @param  array  $mergeData
-     * @return \Illuminate\Contracts\View\View|\Illuminate\Contracts\View\Factory
      */
     public function view($view = null, $data = [], $mergeData = []): View|ViewFactory
     {
@@ -53,7 +52,7 @@ class BotManChatConfigurator implements BotManChatConfiguratorContract
             return $factory;
         }
 
-        return $factory->make('botman-chat-sdk::' . $view, $data, $mergeData);
+        return $factory->make('botman-chat-sdk::'.$view, $data, $mergeData);
     }
 
     protected function render($view, $data = [], $mergeData = []): string
@@ -105,13 +104,15 @@ class BotManChatConfigurator implements BotManChatConfiguratorContract
             ], $config);
         }
 
-        if (!empty($name)) {
+        if (! empty($name)) {
             if (is_array($name)) {
                 $this->config = array_merge($this->config, $name);
-            } elseif (!empty($value)) {
+            } elseif (! empty($value)) {
                 data_set($this->config, $name, $value);
+
                 return $this;
             }
+
             return data_get($this->config, $name);
         }
 
@@ -134,6 +135,7 @@ class BotManChatConfigurator implements BotManChatConfiguratorContract
         if (file_exists($manifest)) {
             $manifest = json_decode(file_get_contents($manifest), true);
             $asset = $manifest[$path];
+
             // TODO: don't rely on this helper function
             return asset('vendor/botman-chat-sdk/'.$asset['file']);
         }
@@ -146,6 +148,7 @@ class BotManChatConfigurator implements BotManChatConfiguratorContract
         if (file_exists($hot)) {
             return file_get_contents($hot).'/'.ltrim($path, '/');
         }
+
         return false;
     }
 }

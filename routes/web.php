@@ -1,7 +1,7 @@
 <?php
 
-use OrchestrateXR\BotManChatSDK\BotManChat;
 use Illuminate\Http\Request;
+use OrchestrateXR\BotManChatSDK\BotManChat;
 
 Route::get(BotManChat::config('frameEndpoint'), function (Request $request) {
     return BotManChat::view('chat', ['config' => ['isMobile' => $request->isMobile]]);

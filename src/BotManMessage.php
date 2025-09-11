@@ -2,6 +2,4 @@
 
 namespace OrchestrateXR\BotManChatSDK;
 
-class BotManMessage
-{
-}
+class BotManMessage {}

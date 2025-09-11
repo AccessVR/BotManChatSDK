@@ -25,6 +25,7 @@ class CommandDriver extends HttpDriver
     public static function make(Command $command, array $config = [], array $httpOptions = []): self
     {
         self::setOutput($command->getOutput());
+
         return new self(request(), $config, new Curl($httpOptions));
     }
 
@@ -35,13 +36,13 @@ class CommandDriver extends HttpDriver
 
     public function isConfigured()
     {
-        return !empty($this->output);
+        return ! empty($this->output);
     }
 
     public function buildPayload(Request $request)
     {
         $this->payload = collect([
-            'text' => $request->get('text')
+            'text' => $request->get('text'),
         ]);
     }
 
@@ -53,6 +54,7 @@ class CommandDriver extends HttpDriver
     public function getMessages()
     {
         $text = $this->payload->get('text');
+
         return [new IncomingMessage($text, 'cli-user', 'cli')];
     }
 
@@ -84,7 +86,7 @@ class CommandDriver extends HttpDriver
         if (self::$output) {
             self::$output->writeln($text);
         } else {
-            echo $text . PHP_EOL;
+            echo $text.PHP_EOL;
         }
     }
 
@@ -92,5 +94,4 @@ class CommandDriver extends HttpDriver
     {
         // Optional: could simulate typing here
     }
-
 }
